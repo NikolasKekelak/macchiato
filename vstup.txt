@@ -1,0 +1,9 @@
+.i 2
+.o 3
+.ilb X z1
+.ob J1 K1 Y
+.type fr
+.p 4
+00 0-0 
+10 1-1 
+.e

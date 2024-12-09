@@ -15,6 +15,7 @@ void espresso_converter(const string &vstup, bool vypis, bool vystup ) {
     string jednotky="";
     int k=l_stav;
     while(k--)jednotky+="1";
+    if(priority) jednotky[jednotky.size()-1]='0';
     ofstream output ("vstup.txt");
     output<<".i "<<l_stav+1<<"\n";
     output<<".o "<<2*l_stav+1<<"\n";
@@ -28,15 +29,21 @@ void espresso_converter(const string &vstup, bool vypis, bool vystup ) {
     output<<" Y\n.type fr\n.p "<<2*(vstup.size()+1)<<"\n";
 
     for(char c= '0'; c<='1'; c++ ) {
-        for(int i=0; i<vstup.size()+1; i++) {
+        for(int i=0; i<=vstup.size()-priority; i++) {
             string stav=to_binary(i);
             output<<c<<stav;
             output<<" ";
-            string memory=next_stav(vstup, usek(vstup,0,i)+c);
+            string memory=next_stav(vstup, usek(vstup,(priority? ((i==vstup.size()-1)? 1 : 0 ) : 0 ) ,i)+c);;
             for(int j=0; j<l_stav; j++) {
                 output<< ( (stav[j]=='1') ?  '-' : memory[j]) << ( (stav[j]=='0') ?  '-' : reversebit(memory[j]));
             }
-            output<<((stav==jednotky)? "1" : "0");
+            if(priority) {
+                if(c=='1' && stav==jednotky) output<<1;
+                else output<<0;
+
+            }
+            else
+                output<<((stav==jednotky)? "1" : "0");
             output<<" \n";
         }
     }

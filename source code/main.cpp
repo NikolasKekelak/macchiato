@@ -8,8 +8,6 @@
 #include <algorithm>
 
 
-
-
 using namespace std;
 
 
@@ -27,6 +25,7 @@ int length;
 #include "karnafove_vypis.h"
 #include "karnafove_generacia.h"
 #include "espresso.h"
+
 map<string, string> modify_map_values(const map<string, string> &mp , int numb, char type)   //type J alebo K
 {
     map<string, string> ans;
@@ -68,6 +67,7 @@ void karnaughove(const string &vstup) {
 
 
 int main() {
+
 
     cout<<"Typ automatu: Moore[0] / Mealy[1]  ->";
     cin>> priority;
